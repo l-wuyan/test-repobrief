@@ -88,6 +88,10 @@ func main() {
 		json.NewEncoder(w).Encode(t)
 	})
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+	})
+
 	log.Println("Task API running on :8090")
 	log.Fatal(http.ListenAndServe(":8090", nil))
 }
